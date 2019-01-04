@@ -1,8 +1,8 @@
 spring.application.name: stream-table-sample
 spring.cloud.stream.bindings.input:
   destination: user-clicks3
-  consumer:
-    useNativeDecoding: true
+#  consumer:
+#    useNativeDecoding: true
 spring.cloud.stream.bindings.inputTable:
   destination: user-regions
   contentType: application/avro
@@ -12,10 +12,10 @@ spring.cloud.stream.bindings.output:
   destination: output-topic
   producer:
     useNativeEncoding: true
-spring.cloud.stream.kafka.streams.bindings.input:
-  consumer:
-    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-    valueSerde: org.apache.kafka.common.serialization.Serdes$LongSerde
+#spring.cloud.stream.kafka.streams.bindings.input:
+#  consumer:
+#    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+#    valueSerde: org.apache.kafka.common.serialization.Serdes$LongSerde
 spring.cloud.stream.kafka.streams.bindings.inputTable:
   consumer:
     keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
@@ -31,3 +31,5 @@ spring.cloud.stream.kafka.streams.binder:
     default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
     default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
     commit.interval.ms: 1000
+spring.cloud.stream.bindings.input1.destination: output-topic
+spring.cloud.stream.bindings.output1.destination: user-clicks3

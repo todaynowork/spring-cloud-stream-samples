@@ -42,13 +42,13 @@ public class KafkaStreamsGlobalKTableJoin {
 
 		@StreamListener
 		@SendTo("output")
-		public KStream<String, Long> process(@Input("input") KStream<String, Long> userClicksStream,
+		public KStream<String, Long> process(@Input("input") KStream<String, Click> userClicksStream,
 											 @Input("inputTable") GlobalKTable<String, String> userRegionsTable) {
 
 			return userClicksStream
 					.leftJoin(userRegionsTable,
 							(name,value) -> name,
-							(clicks, region) -> new RegionWithClicks(region == null ? "UNKNOWN" : region, clicks)
+							(clicks, region) -> new RegionWithClicks(region == null ? "UNKNOWN" : region, clicks.getClick())
 							)
 					.map((user, regionWithClicks) -> new KeyValue<>(regionWithClicks.getRegion(), regionWithClicks.getClicks()))
 					.groupByKey(Serialized.with(Serdes.String(), Serdes.Long()))
